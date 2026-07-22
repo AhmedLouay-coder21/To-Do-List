@@ -11,8 +11,8 @@ module.exports = {
     clean: true,
   },
     devServer: {
-    static: "./dist",           // or wherever your HTML lives
-    open: true,                 // auto-open browser
+    static: "./dist",
+    open: true,
   },
   
     module: {
@@ -25,7 +25,7 @@ module.exports = {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./src/template.html",
+        template: "./src/pages/index.html",
       }),
     ],
 };
