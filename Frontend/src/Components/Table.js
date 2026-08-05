@@ -11,14 +11,19 @@ export default function CreateAllTasksTable(newTask)
             <th>Due Date</th>
             <th>Days since creation</th>
         </tr>
-          <tr>
-            <td>${newTask.Name}</td>
-            <td>${newTask.Priority}</td>
-            <td>${newTask.Details}</td>
-            <td>${newTask.creationDate}</td>
-            <td>${newTask.dueDate}</td>
-            <td>${newTask.daysSinceCreation}</td>
-        </tr>
         `;
+
+    newTask.forEach(task => {
+    Table.innerHTML += `
+        <tr>
+            <td>${task.name}</td>
+            <td>${task.priority}</td>
+            <td>${task.details}</td>
+            <td>${task.creationDate}</td>
+            <td>${task.dueDate}</td>
+            <td>${task.daysSinceCreation}</td>
+        </tr>
+    `;
+});
     document.querySelector("body").appendChild(Table);
 }
