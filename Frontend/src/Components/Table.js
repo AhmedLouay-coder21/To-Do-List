@@ -1,29 +1,103 @@
-
-export default function CreateAllTasksTable(newTask)
+import {
+  constructTable,
+  tableFeatures,
+} from '@tanstack/table-core'
+import { FlexRender } from '@tanstack/table-core/flex-render'
+import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-bindings'
+import { data as Mockdata } from '../data/data'
+import { GenericApiFetch } from '../Api/Api'
+const features = tableFeatures({
+  coreReactivityFeature: storeReactivityBindings(),
+})
+const isMockData = false;
+let data;
+if (isMockData)
 {
-    const Table = document.createElement("table");
-    Table.innerHTML = `
-        <tr>
-            <th>Name</th>
-            <th>Priority</th>
-            <th>Details</th>
-            <th>Creation Date</th>
-            <th>Due Date</th>
-            <th>Days since creation</th>
-        </tr>
-        `;
+    data = Mockdata;
+}
+else
+{
+    data = await GenericApiFetch();
+}
 
-    newTask.forEach(task => {
-    Table.innerHTML += `
-        <tr>
-            <td>${task.name}</td>
-            <td>${task.priority}</td>
-            <td>${task.details}</td>
-            <td>${task.creationDate}</td>
-            <td>${task.dueDate}</td>
-            <td>${task.daysSinceCreation}</td>
-        </tr>
-    `;
-});
-    document.querySelector("body").appendChild(Table);
+export function CreateAllTasksTable()
+{
+    const columns = [
+    {
+        accessorKey: "name",
+        header: "Name",
+    },
+    {
+        accessorKey: "priority",
+        header: "Priority",
+    },
+    {
+        accessorKey: "details",
+        header: "Details",
+    },
+    {
+        accessorKey: "creationDate",
+        header: "Creation date",
+    },
+    {
+        accessorKey: "dueDate",
+        header: "Due date",
+    },
+        {
+        accessorKey: "daysSinceCreation",
+        header: "Days since creation",
+    },
+    ];
+
+    const table = constructTable({
+    features,
+    columns,
+    data,
+    })
+
+    const app = document.getElementById('app')
+
+    if (!app) {
+    throw new Error('Missing #app element')
+    }
+
+    const renderTable = () => {
+    const tableElement = document.createElement('table')
+    const thead = document.createElement('thead')
+    const tbody = document.createElement('tbody')
+
+    table.getHeaderGroups().forEach((headerGroup) => {
+        const tr = document.createElement('tr')
+
+        headerGroup.headers.forEach((header) => {
+        const th = document.createElement('th')
+        th.innerHTML = header.isPlaceholder
+            ? ''
+            : String(FlexRender({ header }) ?? '')
+        tr.appendChild(th)
+        })
+
+        thead.appendChild(tr)
+    })
+
+    table.getRowModel().rows.forEach((row) => {
+        const tr = document.createElement('tr')
+
+        row.getAllCells().forEach((cell) => {
+        const td = document.createElement('td')
+        td.innerHTML = String(FlexRender({ cell }) ?? '')
+        tr.appendChild(td)
+        })
+
+        tbody.appendChild(tr)
+    })
+
+    tableElement.appendChild(thead)
+    tableElement.appendChild(tbody)
+
+    app.replaceChildren(tableElement)
+    }
+
+    table.store.subscribe(() => renderTable())
+    renderTable()
 }

@@ -1,0 +1,42 @@
+export const data = [
+  {
+    name: "Finish TanStack Table",
+    priority: "High",
+    details: "Read the documentation and integrate it into the to-do app.",
+    creationDate: "2026-08-01",
+    dueDate: "2026-08-06",
+    daysSinceCreation: 4,
+  },
+  {
+    name: "Buy groceries",
+    priority: "Medium",
+    details: "Milk, eggs, bread, and coffee.",
+    creationDate: "2026-08-03",
+    dueDate: "2026-08-05",
+    daysSinceCreation: 2,
+  },
+  {
+    name: "Workout",
+    priority: "Low",
+    details: "30 minutes of cardio and stretching.",
+    creationDate: "2026-08-04",
+    dueDate: "2026-08-05",
+    daysSinceCreation: 1,
+  },
+  {
+    name: "Study Algorithms",
+    priority: "High",
+    details: "Solve three greedy algorithm problems.",
+    creationDate: "2026-07-30",
+    dueDate: "2026-08-07",
+    daysSinceCreation: 6,
+  },
+  {
+    name: "Update Portfolio",
+    priority: "Medium",
+    details: "Add the new To-Do application project.",
+    creationDate: "2026-07-28",
+    dueDate: "2026-08-10",
+    daysSinceCreation: 8,
+  },
+];

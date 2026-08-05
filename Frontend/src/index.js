@@ -1,11 +1,12 @@
 import { data } from "browserslist";
 import "./styles.css";
-import CreateAllTasksTable from './Components/Table.js';
+import { CreateAllTasksTable } from './Components/Table.js';
 import { GenericApiFetch } from './Api/Api.js';
 
-async function Initialize() {
-    const allTasks = await GenericApiFetch();
-    CreateAllTasksTable(allTasks);
-}
+// async function Initialize() {
+//     const allTasks = await GenericApiFetch();
+//     CreateAllTasksTable(allTasks);
+// }
 
-Initialize();
+// Initialize();
+CreateAllTasksTable();

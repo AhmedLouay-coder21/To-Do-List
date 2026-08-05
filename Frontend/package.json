@@ -12,6 +12,7 @@
   "description": "A simple, elegant and color customizable to-do list that suits your needs and keeps you motifated about your tasks, this to-do list uses some of the core concepts of javascript such as (webpack,JSON,OOP,npm etc..,",
   "main": "index.js",
   "dependencies": {
+    "@tanstack/table-core": "^9.0.0",
     "acorn": "^8.15.0",
     "acorn-import-phases": "^1.0.4",
     "ajv": "^8.17.1",
