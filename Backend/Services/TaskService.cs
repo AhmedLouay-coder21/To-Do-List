@@ -52,11 +52,14 @@ namespace Backend.Services
             if (updatedToDoTaskDto.Name != null)
                 toDoTask.Name = updatedToDoTaskDto.Name;
 
-            //if (updatedToDoTaskDto.Priority != null)
-            //    toDoTask.Priority = updatedToDoTaskDto.Priority;
+            if (updatedToDoTaskDto.Priority != null)
+                toDoTask.Priority = updatedToDoTaskDto.Priority.Value;
 
             if (updatedToDoTaskDto.Details != null)
                 toDoTask.Details = updatedToDoTaskDto.Details;
+
+            if (updatedToDoTaskDto.IsCompleted is bool isCompleted)
+                toDoTask.IsCompleted = isCompleted;
 
             if (updatedToDoTaskDto.DueDate.HasValue)
                 toDoTask.DueDate = updatedToDoTaskDto.DueDate;
@@ -79,6 +82,7 @@ namespace Backend.Services
         public string? DeleteAllTasks()
         {
             _context.ToDoTasks.ExecuteDelete();
+            _context.SaveChanges();
             return "All tasks was deleted successfully";
         }
     }

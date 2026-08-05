@@ -1,4 +1,5 @@
 ﻿using Backend.DTO;
+using Backend.Enums;
 
 namespace Backend.Models
 {
@@ -6,10 +7,10 @@ namespace Backend.Models
     {
         public int Id { get; set; }
         public string? Name { get; set; } = "";
-        public enum Priority { Low, Medium, High, VeryHigh }
+        public Priority Priority { get; set; }
         public string? Details { get; set; } = "";
+        public bool IsCompleted { get; set; } = false;
         public DateTime? CreationDate { get; set; }
         public DateTime? DueDate { get; set; }
-        public UpdatedToDoTaskDto.Priority priority { get; internal set; }
     }
 }

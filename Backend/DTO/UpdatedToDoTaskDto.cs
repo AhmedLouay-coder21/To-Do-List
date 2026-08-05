@@ -1,10 +1,13 @@
-﻿namespace Backend.DTO
+﻿using Backend.Enums;
+
+namespace Backend.DTO
 {
     public class UpdatedToDoTaskDto
     {
         public string? Name { get; set; }
-        public enum Priority { Low, Medium, High, VeryHigh }
+        public Priority? Priority { get; set; }
         public string? Details { get; set; }
+        public bool? IsCompleted { get; set; } = false;
         public DateTime? DueDate { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Backend.Data.Seeding;
 using Backend.Interfaces;
 using Backend.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Backend
 {
@@ -19,7 +20,10 @@ namespace Backend
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<ITaskService, TaskService>();
-
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
