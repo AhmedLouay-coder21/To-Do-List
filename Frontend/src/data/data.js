@@ -6,6 +6,7 @@ export const data = [
     creationDate: "2026-08-01",
     dueDate: "2026-08-06",
     daysSinceCreation: 4,
+    IsComplete: false,
   },
   {
     name: "Buy groceries",
@@ -14,6 +15,7 @@ export const data = [
     creationDate: "2026-08-03",
     dueDate: "2026-08-05",
     daysSinceCreation: 2,
+    IsComplete: true,
   },
   {
     name: "Workout",
@@ -22,6 +24,7 @@ export const data = [
     creationDate: "2026-08-04",
     dueDate: "2026-08-05",
     daysSinceCreation: 1,
+    IsComplete: false,
   },
   {
     name: "Study Algorithms",
@@ -30,6 +33,7 @@ export const data = [
     creationDate: "2026-07-30",
     dueDate: "2026-08-07",
     daysSinceCreation: 6,
+    IsComplete: false,
   },
   {
     name: "Update Portfolio",
@@ -38,5 +42,6 @@ export const data = [
     creationDate: "2026-07-28",
     dueDate: "2026-08-10",
     daysSinceCreation: 8,
+    IsComplete: true,
   },
 ];
