@@ -1,6 +1,7 @@
 import {
   constructTable,
   tableFeatures,
+  rowSelectionFeature,
 } from '@tanstack/table-core'
 import { FlexRender } from '@tanstack/table-core/flex-render'
 import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-bindings'
@@ -8,6 +9,7 @@ import { data as Mockdata } from '../data/data'
 import { GenericApiFetch } from '../Api/Api'
 const features = tableFeatures({
   coreReactivityFeature: storeReactivityBindings(),
+  rowSelectionFeature,
 })
 const isMockData = false;
 let data;
@@ -55,10 +57,11 @@ export function CreateAllTasksTable()
     data,
     })
 
-    const app = document.getElementById('app')
+    const TaskTable = document.createElement('div');
+    TaskTable.id = 'tasks-table';
 
-    if (!app) {
-    throw new Error('Missing #app element')
+    if (!TaskTable) {
+    throw new Error('Missing #TaskTable element')
     }
 
     const renderTable = () => {
@@ -68,7 +71,6 @@ export function CreateAllTasksTable()
 
     table.getHeaderGroups().forEach((headerGroup) => {
         const tr = document.createElement('tr')
-
         headerGroup.headers.forEach((header) => {
         const th = document.createElement('th')
         th.innerHTML = header.isPlaceholder
@@ -76,13 +78,25 @@ export function CreateAllTasksTable()
             : String(FlexRender({ header }) ?? '')
         tr.appendChild(th)
         })
-
         thead.appendChild(tr)
     })
-
     table.getRowModel().rows.forEach((row) => {
         const tr = document.createElement('tr')
+        tr.classList.add("Task");
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = row.getIsSelected();
 
+        checkbox.addEventListener('change', () => {
+            row.toggleSelected();
+        });
+        tr.addEventListener('click', () => {
+            row.toggleSelected();
+        });
+
+        const checkboxTd = document.createElement('td');
+        checkboxTd.appendChild(checkbox);
+        tr.appendChild(checkboxTd);
         row.getAllCells().forEach((cell) => {
         const td = document.createElement('td')
         td.innerHTML = String(FlexRender({ cell }) ?? '')
@@ -95,7 +109,8 @@ export function CreateAllTasksTable()
     tableElement.appendChild(thead)
     tableElement.appendChild(tbody)
 
-    app.replaceChildren(tableElement)
+    TaskTable.replaceChildren(tableElement)
+    document.getElementById('app').appendChild(TaskTable);
     }
 
     table.store.subscribe(() => renderTable())

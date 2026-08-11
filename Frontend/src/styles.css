@@ -9,34 +9,106 @@ body
   background-image: linear-gradient(to bottom, #FED0C5, #8B47B5);
   background-repeat: no-repeat;
 }
-#leftText
-{
+#app {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 50px;
-  margin-left: 20%;
-  margin-top: 10%;
+  height: 100%;
+  padding: 10% 5% 0;
+  margin-left: 0;
+  transition: margin-left 0.5s ease;
+}
+#app.open
+{
+  margin-left: var(--sidebar-width, 160px);
+}
+#SideBar {
+--sidebar-width: min(350px, 85vw);
+--sidebar-height: 90%;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: var(--sidebar-width);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transform: translateX(-150%);
+  transition: transform 0.5s ease;
+  border-radius: 3%;
+}
+@media screen and (max-width: 600px) {
+  #SideBar {
+  --sidebar-width: 400px;
+  --sidebar-height: 50%;
+  }
+}
+#SideBar.open {
+  transform: translateX(0);
 }
 
-#Title
-{
-  text-align: center;
-  font-size: 50px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background: linear-gradient(to bottom, red, #8B47B5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+#SideBarButton {
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  z-index: 2;
 }
-#newTask
-{
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+#SideBarButton.open {
+  display: none;
 }
-table 
+#SideBar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+
+#SideBar a:hover {
+  color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+  #SideBar {padding-top: 15px;}
+  #SideBar a {font-size: 18px;}
+}
+#SideBarHeader
 {
+  display: flex;
+  border-bottom: 2px solid #333;
   width: 100%;
+  margin-top: 5%;
+  justify-content: space-around;
+  font-size:xx-large;
+  font-family:cursive;
+}
+.sidebar-section
+{
+  margin: 10%;
+}
+.section-header
+{
+  font-size: large;
+}
+#tasks-table
+{
+  width: 70%;
+  flex-shrink: 1;
+  min-width: 0;
+  /* border: 10px solid red; */
+}
+#tasks-table table {
+  width: 100%;
+  table-layout: fixed;
+  min-width: 0;
   border-collapse: collapse;
+  /* border: 10px solid red; */
 }
 
 th, td 
@@ -51,10 +123,29 @@ td
 th
 {
   text-align: center;
-  border-bottom: 2px solid #333;
 }
-
+thead tr {
+    border-bottom: 2px solid #333;
+}
+.Task
+{
+  transform: scale(1);
+  transition: transform 1s ease;
+}
+.Task:hover
+{
+  transform: scale(1.1);
+  background-color: #ccc;
+}
+.Task:active
+{
+  transform: scale(0.9);
+}
 tr:not(:last-child) 
 {
   border-bottom: 1px solid #ccc;
+}
+#TaskCompletionCheckBox
+{
+  margin: 30%;
 }
