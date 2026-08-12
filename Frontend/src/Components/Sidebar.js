@@ -1,19 +1,42 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const headers = [
     {
         name: 'TASKS',
         children: [
-            'Upcoming',
-            'Today',
-            'Calender'
+            {
+                name: 'Upcoming',
+                icon: 'fa-forward'
+            },
+            {
+                name: 'Today',
+                icon: 'fa-list-check'
+            },
+            {
+                name: 'Calender',
+                icon: 'fa-calendar-days'
+            }
         ]
     },
     {
         name: 'PRIORITY',
         children: [
-            'Low',
-            'Medium',
-            'High',
-            'Very High'
+            {
+                name: 'Low', 
+                color: '#70d1d6'
+            },
+            {
+                name:'Medium',
+                color: '#f5d34f'
+            },
+            {
+                name: 'High',
+                color: '#e66b6b'
+            },
+            {
+                name: 'Very High',
+                color: '#333'
+            }
         ]
     }
 ];
@@ -25,14 +48,21 @@ export function RenderSideBar()
 
     const SideBarHeader = document.createElement('div');
     SideBarHeader.id = 'SideBarHeader';
-    SideBarHeader.textContent = 'Menu';
+
+    const SideBarHeaderText = document.createElement('div');
+    SideBarHeaderText.textContent = 'Menu';
+    SideBarHeaderText.id = 'SideBarHeaderText';
+    SideBarHeader.appendChild(SideBarHeaderText);
 
     const HamBurgerButton = document.createElement('Button');
     HamBurgerButton.textContent = '☰';
+    HamBurgerButton.classList.add('hamburger-button');
+    HamBurgerButton.id = 'SideBarHeaderButton';
     
     
     const SideBarButton = document.createElement('button');
     SideBarButton.id = 'SideBarButton';
+    SideBarButton.classList.add('hamburger-button');
     SideBarButton.textContent = '☰';
     SideBarButton.addEventListener("click", (e) => {
         if (SideBar.classList.contains('open')) {
@@ -52,6 +82,10 @@ export function RenderSideBar()
 
     SideBar.appendChild(SideBarHeader);
 
+    const SideBarSections = document.createElement('div');
+    SideBarSections.classList.add('sidebar-sections');
+    SideBar.appendChild(SideBarSections);
+
     headers.forEach(element => {
         const section = document.createElement('div');
         section.classList.add('sidebar-section');
@@ -64,15 +98,38 @@ export function RenderSideBar()
         const subSections = document.createElement('div');
         subSections.classList.add('sidebar-subsections');
 
-        element.children.forEach(childName => {
-            const childItem = document.createElement('a');
+        element.children.forEach(child => {
+            const childItem = document.createElement('div');
             childItem.classList.add('sidebar-item');
-            childItem.textContent = childName;
-            subSections.appendChild(childItem);
+
+                if (child.icon) 
+                {
+                const icon = document.createElement('i');
+                icon.classList.add('fa-solid', child.icon);
+                icon.classList.add('sidebar-icon');
+
+                childItem.appendChild(icon);
+                }
+
+                if (child.color) 
+                {
+                    const square = document.createElement('span');
+                    square.classList.add('priority-square');
+                    square.style.backgroundColor = child.color;
+
+                    childItem.appendChild(square);
+                }
+
+                const text = document.createElement('span');
+                text.textContent = child.name;
+
+                childItem.appendChild(text);
+
+                subSections.appendChild(childItem);
         });
 
         section.appendChild(subSections);
-        SideBar.appendChild(section);
+        SideBarSections.appendChild(section);
     });
     document.getElementById('app').appendChild(SideBarButton);
     document.getElementById('app').appendChild(SideBar);

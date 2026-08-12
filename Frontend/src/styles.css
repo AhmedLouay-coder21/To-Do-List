@@ -11,7 +11,7 @@ body
 }
 #app {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 50px;
   height: 100%;
@@ -43,19 +43,11 @@ body
 }
 @media screen and (max-width: 600px) {
   #SideBar {
-  --sidebar-width: 400px;
-  --sidebar-height: 50%;
+  --sidebar-width: 300px;
   }
 }
 #SideBar.open {
   transform: translateX(0);
-}
-
-#SideBarButton {
-  position: fixed;
-  top: 5%;
-  left: 5%;
-  z-index: 2;
 }
 
 #SideBarButton.open {
@@ -81,36 +73,80 @@ body
 #SideBarHeader
 {
   display: flex;
-  border-bottom: 2px solid #333;
-  width: 100%;
-  margin-top: 5%;
-  justify-content: space-around;
+  width: auto;
+  text-align: center;
+  margin: 5%;
+  gap: 65%;
   font-size:xx-large;
   font-family:cursive;
 }
-.sidebar-section
+.hamburger-button {
+  background-color: transparent;
+  border: none;
+}
+#SideBarButton
 {
-  margin: 10%;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  z-index: 2;
 }
 .section-header
 {
   font-size: large;
 }
+
+.priority-square {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+.sidebar-sections
+{
+  display: flex;
+  margin: 10%;
+  margin-left: 20%;
+  flex-direction: column;
+  height: 100%;
+  width: auto;
+  gap: 0%;
+  font-family: cursive;
+}
+.sidebar-section
+{
+  height: 30%;
+}
+.sidebar-subsections
+{
+  display: flex;
+  gap: 10%;
+  height: 50%;
+  flex-direction: column;
+  margin-top: 5%;
+}
+.sidebar-item span
+{
+  margin-left: 5%;
+}
 #tasks-table
 {
-  width: 70%;
+  width: auto;
   flex-shrink: 1;
   min-width: 0;
   /* border: 10px solid red; */
 }
 #tasks-table table {
-  width: 100%;
+  width: 90%;
   table-layout: fixed;
   min-width: 0;
   border-collapse: collapse;
-  /* border: 10px solid red; */
 }
-
+table
+{
+  margin-left: 5%;
+}
 th, td 
 {
   padding: 12px;
