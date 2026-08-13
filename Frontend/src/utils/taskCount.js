@@ -1,5 +1,7 @@
 import { isFuture, isToday } from "date-fns";
-import { data } from "../data/data";
+import { GenericApiFetch } from "../Api/Api";
+const data = await GenericApiFetch();
+
 export function todayTasksCount()
 {
     let count = 0;
@@ -16,6 +18,17 @@ export function upcomingTasksCount()
     let count = 0;
     data.forEach(task => {
         if(isFuture(task.dueDate))
+        {
+            count++;
+        }
+    });
+    return count;
+}
+export function taskPriorityCount(taskPriority)
+{
+    let count = 0;
+    data.forEach(task => {
+        if(task.priority == taskPriority)
         {
             count++;
         }

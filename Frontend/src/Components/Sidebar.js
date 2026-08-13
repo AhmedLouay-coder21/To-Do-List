@@ -1,7 +1,8 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { RenderUpcoming } from '../views/upcoming'
 import { RenderToday } from '../views/today';
-import { todayTasksCount, upcomingTasksCount } from '../utils/taskCount';
+import { taskPriorityCount, todayTasksCount, upcomingTasksCount } from '../utils/taskCount';
+import { RenderPriority } from '../views/taskPriority';
 const headers = [
     {
         name: 'TASKS',
@@ -135,6 +136,9 @@ export function RenderSideBar()
                 const square = document.createElement('span');
                 square.classList.add('priority-square');
                 square.style.backgroundColor = child.color;
+
+                childItem.addEventListener('click', () => RenderPriority(child.name));
+                count.textContent = taskPriorityCount(child.name);
 
                 type.appendChild(square);
             }

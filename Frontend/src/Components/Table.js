@@ -5,24 +5,13 @@ import {
 } from '@tanstack/table-core'
 import { FlexRender } from '@tanstack/table-core/flex-render'
 import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-bindings'
-import { data as Mockdata } from '../data/data'
 import { GenericApiFetch } from '../Api/Api'
 import { isFuture, isToday } from 'date-fns'
 const features = tableFeatures({
   coreReactivityFeature: storeReactivityBindings(),
   rowSelectionFeature,
 })
-const isMockData = true;
-let data;
-if (isMockData)
-{
-    data = Mockdata;
-}
-else
-{
-    data = await GenericApiFetch();
-}
-
+const data = await GenericApiFetch();
 export function CreateTasksTable(tasksType = 'all')
 {
     const oldTable = document.getElementById('tasks-table');
@@ -31,7 +20,9 @@ export function CreateTasksTable(tasksType = 'all')
     {
         oldTable.remove();
     }
-    let tableData = data;
+
+    let tableData;
+
     if(tasksType == 'today')
     {
         tableData = data.filter(task => isToday(task.dueDate));
@@ -40,6 +31,20 @@ export function CreateTasksTable(tasksType = 'all')
     {
         tableData = data.filter(task => isFuture(task.dueDate));
     }
+    else if (tasksType == 'all')
+    {
+        tableData = data;
+    }
+    else
+    {
+        tableData = data.filter(task => task.priority == tasksType);
+    }
+
+    if(tableData.length == 0)
+    {
+        return;
+    }
+    
     const columns = [
     {
         accessorKey: "name",
