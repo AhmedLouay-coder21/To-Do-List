@@ -1,5 +1,6 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import { RenderUpcoming } from '../views/upcoming'
+import { RenderToday } from '../views/today';
 const headers = [
     {
         name: 'TASKS',
@@ -101,6 +102,14 @@ export function RenderSideBar()
         element.children.forEach(child => {
             const childItem = document.createElement('div');
             childItem.classList.add('sidebar-item');
+            if(child.name == 'Upcoming')
+            {
+                childItem.addEventListener('click', RenderUpcoming);
+            }
+            else if (child.name == 'Today')
+            {
+                childItem.addEventListener('click', RenderToday);
+            }
 
                 if (child.icon) 
                 {

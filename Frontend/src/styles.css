@@ -116,7 +116,7 @@ body
 }
 .sidebar-section
 {
-  height: 30%;
+  height: 40%;
 }
 .sidebar-subsections
 {
@@ -184,4 +184,19 @@ tr:not(:last-child)
 #TaskCompletionCheckBox
 {
   margin: 30%;
+}
+.sidebar-item
+{
+    padding: 10px 12px;
+    border-radius: 8px;
+
+    transition: 
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sidebar-item:hover
+{
+    background-color: grey;
+    transform: translateX(3px);
 }

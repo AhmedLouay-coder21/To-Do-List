@@ -7,11 +7,12 @@ import { FlexRender } from '@tanstack/table-core/flex-render'
 import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-bindings'
 import { data as Mockdata } from '../data/data'
 import { GenericApiFetch } from '../Api/Api'
+import { isFuture, isToday } from 'date-fns'
 const features = tableFeatures({
   coreReactivityFeature: storeReactivityBindings(),
   rowSelectionFeature,
 })
-const isMockData = false;
+const isMockData = true;
 let data;
 if (isMockData)
 {
@@ -22,8 +23,23 @@ else
     data = await GenericApiFetch();
 }
 
-export function CreateAllTasksTable()
+export function CreateTasksTable(tasksType = 'all')
 {
+    const oldTable = document.getElementById('tasks-table');
+
+    if (oldTable)
+    {
+        oldTable.remove();
+    }
+    let tableData = data;
+    if(tasksType == 'today')
+    {
+        tableData = data.filter(task => isToday(task.dueDate));
+    }
+    else if(tasksType == 'upcoming')
+    {
+        tableData = data.filter(task => isFuture(task.dueDate));
+    }
     const columns = [
     {
         accessorKey: "name",
@@ -54,7 +70,7 @@ export function CreateAllTasksTable()
     const table = constructTable({
     features,
     columns,
-    data,
+    data: tableData,
     })
 
     const TaskTable = document.createElement('div');
