@@ -126,9 +126,17 @@ body
   flex-direction: column;
   margin-top: 5%;
 }
-.sidebar-item span
+.sidebar-item
 {
-  margin-left: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+.task-type
+{
+  display: flex;
+  width: 100%;
+  gap: 5%;
+  align-items: center;
 }
 #tasks-table
 {

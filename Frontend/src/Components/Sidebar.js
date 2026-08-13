@@ -1,6 +1,7 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { RenderUpcoming } from '../views/upcoming'
 import { RenderToday } from '../views/today';
+import { todayTasksCount, upcomingTasksCount } from '../utils/taskCount';
 const headers = [
     {
         name: 'TASKS',
@@ -102,39 +103,51 @@ export function RenderSideBar()
         element.children.forEach(child => {
             const childItem = document.createElement('div');
             childItem.classList.add('sidebar-item');
+
+            const type = document.createElement('div');
+            type.classList.add('task-type');
+
+            const count = document.createElement('div');
+            count.classList.add('task-count');
+
             if(child.name == 'Upcoming')
             {
                 childItem.addEventListener('click', RenderUpcoming);
+                count.textContent = upcomingTasksCount();
             }
             else if (child.name == 'Today')
             {
                 childItem.addEventListener('click', RenderToday);
+                count.textContent = todayTasksCount();
             }
 
-                if (child.icon) 
-                {
-                const icon = document.createElement('i');
-                icon.classList.add('fa-solid', child.icon);
-                icon.classList.add('sidebar-icon');
+            if (child.icon) 
+            {
+            const icon = document.createElement('i');
+            icon.classList.add('fa-solid', child.icon);
+            icon.classList.add('sidebar-icon');
 
-                childItem.appendChild(icon);
-                }
+            type.appendChild(icon);
+            }
 
-                if (child.color) 
-                {
-                    const square = document.createElement('span');
-                    square.classList.add('priority-square');
-                    square.style.backgroundColor = child.color;
+            if (child.color) 
+            {
+                const square = document.createElement('span');
+                square.classList.add('priority-square');
+                square.style.backgroundColor = child.color;
 
-                    childItem.appendChild(square);
-                }
+                type.appendChild(square);
+            }
 
-                const text = document.createElement('span');
-                text.textContent = child.name;
+            const text = document.createElement('span');
+            text.textContent = child.name;
 
-                childItem.appendChild(text);
+            type.appendChild(text);
 
-                subSections.appendChild(childItem);
+            childItem.appendChild(type);
+            childItem.appendChild(count);
+
+            subSections.appendChild(childItem);
         });
 
         section.appendChild(subSections);
