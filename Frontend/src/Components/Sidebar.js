@@ -3,7 +3,9 @@ import { RenderUpcoming } from '../views/upcoming'
 import { RenderToday } from '../views/today';
 import { taskPriorityCount, todayTasksCount, upcomingTasksCount } from '../utils/taskCount';
 import { RenderPriority } from '../views/taskPriority';
-const headers = [
+import { RenderCalender } from '../views/calender';
+
+export const headers = [
     {
         name: 'TASKS',
         children: [
@@ -120,6 +122,10 @@ export function RenderSideBar()
             {
                 childItem.addEventListener('click', RenderToday);
                 count.textContent = todayTasksCount();
+            }
+            else if (child.name == 'Calender')
+            {
+                childItem.addEventListener('click', RenderCalender);
             }
 
             if (child.icon) 

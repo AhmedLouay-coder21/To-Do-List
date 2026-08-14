@@ -35,3 +35,8 @@ export function taskPriorityCount(taskPriority)
     });
     return count;
 }
+export function allTasksCount()
+{
+    const count = data.length;
+    return count
+}

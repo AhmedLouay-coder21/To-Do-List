@@ -1,4 +1,8 @@
-body 
+html
+{
+  font-family: cursive;
+}
+body
 {
   display: flex;
   align-items: flex-start;
@@ -6,7 +10,7 @@ body
   padding: 0;
   min-height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to bottom, #FED0C5, #8B47B5);
+  background-image: linear-gradient(to bottom, #FED0C5, #519CEF);
   background-repeat: no-repeat;
 }
 #app {
@@ -15,7 +19,7 @@ body
   align-items: center;
   gap: 50px;
   height: 100%;
-  padding: 10% 5% 0;
+  padding: 2% 5% 0;
   margin-left: 0;
   transition: margin-left 0.5s ease;
 }
@@ -78,7 +82,6 @@ body
   margin: 5%;
   gap: 65%;
   font-size:xx-large;
-  font-family:cursive;
 }
 .hamburger-button {
   background-color: transparent;
@@ -112,7 +115,6 @@ body
   height: 100%;
   width: auto;
   gap: 0%;
-  font-family: cursive;
 }
 .sidebar-section
 {
@@ -143,7 +145,6 @@ body
   width: auto;
   flex-shrink: 1;
   min-width: 0;
-  /* border: 10px solid red; */
 }
 #tasks-table table {
   width: 90%;
@@ -151,24 +152,24 @@ body
   min-width: 0;
   border-collapse: collapse;
 }
-table
+#tasks-table table
 {
   margin-left: 5%;
 }
-th, td 
+#tasks-table th, #tasks-table td 
 {
   padding: 12px;
   text-align: left;
 }
-td
+#tasks-table td
 {
   text-align: center;
 }
-th
+#tasks-table th
 {
   text-align: center;
 }
-thead tr {
+#tasks-table thead tr {
     border-bottom: 2px solid #333;
 }
 .Task
@@ -179,7 +180,7 @@ thead tr {
 .Task:hover
 {
   transform: scale(1.1);
-  background-color: #ccc;
+  background-color: #519bef74;
 }
 .Task:active
 {
@@ -207,4 +208,22 @@ tr:not(:last-child)
 {
     background-color: grey;
     transform: translateX(3px);
+}
+#schedule
+{
+  height: 600px;
+  z-index: 0;
+}
+#PageContent
+{
+  display: flex;
+  flex-direction: column;
+}
+#header
+{
+  display: flex;
+  font-size: xx-large;
+  gap: 5%;
+  margin-left: 5%;
+  margin-bottom: 5%;
 }

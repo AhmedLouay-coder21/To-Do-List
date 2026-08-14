@@ -14,13 +14,6 @@ const features = tableFeatures({
 const data = await GenericApiFetch();
 export function CreateTasksTable(tasksType = 'all')
 {
-    const oldTable = document.getElementById('tasks-table');
-
-    if (oldTable)
-    {
-        oldTable.remove();
-    }
-
     let tableData;
 
     if(tasksType == 'today')
@@ -44,7 +37,7 @@ export function CreateTasksTable(tasksType = 'all')
     {
         return;
     }
-    
+
     const columns = [
     {
         accessorKey: "name",
@@ -131,7 +124,7 @@ export function CreateTasksTable(tasksType = 'all')
     tableElement.appendChild(tbody)
 
     TaskTable.replaceChildren(tableElement)
-    document.getElementById('app').appendChild(TaskTable);
+    document.getElementById('PageContent').appendChild(TaskTable);
     }
 
     table.store.subscribe(() => renderTable())
