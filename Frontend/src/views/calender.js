@@ -1,15 +1,25 @@
-import { Schedule } from '@calendarjs/ce';
+import { Schedule , Calendar } from '@calendarjs/ce';
 import '@calendarjs/ce/dist/style.css';
-import { data } from '../data/data';
 import { ClearPageContent } from '../utils/clearPageContent';
 import { allTasksCount } from '../utils/taskCount';
 import { ConvertTasksToCalendarEvents } from '../utils/dataConvert';
+import { GenericApiFetch } from '../Api/Api';
 
-export function RenderCalender()
+const data = await GenericApiFetch();
+
+export function RenderCalenderPage()
+{
+    ClearPageContent();
+    RenderSchedule();
+    RenderCalender();
+}
+export function RenderSchedule()
 {
     const calendarEvents = ConvertTasksToCalendarEvents(data);
 
-    ClearPageContent();
+    const calendar = document.createElement('div');
+    calendar.id = 'calender';
+
     const header = document.createElement('div');
     header.id = 'header';
 
@@ -25,11 +35,30 @@ export function RenderCalender()
 
     const schedule = document.createElement('div');
     schedule.id = 'schedule';
-    document.getElementById('PageContent').appendChild(schedule);
+    calendar.appendChild(schedule);
+    document.getElementById('PageContent').appendChild(calendar);
     Schedule(schedule, {
     type: 'week',
     weekly: false,
     data: calendarEvents
     });
 
+}
+export function RenderCalender()
+{
+    const calendar = document.getElementById('calender');
+
+    const output = document.createElement('div');
+    output.id = 'output';
+
+    const parentDiv = document.getElementById('calender').parentNode;
+    parentDiv.insertBefore(output,calendar);
+
+    Calendar(calendar, {
+        type: 'inline',
+        value: new Date(),
+        onchange: function(self, value) {
+            output.innerHTML = 'Selected: ' + value;
+        }
+    });
 }

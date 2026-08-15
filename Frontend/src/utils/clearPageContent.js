@@ -1,4 +1,7 @@
 export function ClearPageContent()
 {
-    document.getElementById('PageContent').textContent = '';
+    if(document.getElementById('PageContent'))
+    {
+        document.getElementById('PageContent').textContent = '';
+    }
 }

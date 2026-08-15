@@ -6,7 +6,8 @@ import {
 import { FlexRender } from '@tanstack/table-core/flex-render'
 import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-bindings'
 import { GenericApiFetch } from '../Api/Api'
-import { isFuture, isToday } from 'date-fns'
+import { format, isFuture, isToday } from 'date-fns'
+import { changeDateFormat } from '../utils/dateUtils'
 const features = tableFeatures({
   coreReactivityFeature: storeReactivityBindings(),
   rowSelectionFeature,
@@ -54,12 +55,18 @@ export function CreateTasksTable(tasksType = 'all')
     {
         accessorKey: "creationDate",
         header: "Creation date",
+        cell: ({ getValue }) => {
+            return format(new Date(getValue()), "yyyy-mm-dd E HH:mm");
+        },
     },
     {
         accessorKey: "dueDate",
         header: "Due date",
+        cell: ({ getValue }) => {
+            return format(new Date(getValue()), "yyyy-mm-dd E HH:mm");
+        },
     },
-        {
+    {
         accessorKey: "daysSinceCreation",
         header: "Days since creation",
     },

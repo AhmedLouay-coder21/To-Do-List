@@ -27,6 +27,11 @@ body
 {
   margin-left: var(--sidebar-width, 160px);
 }
+@media screen and (max-width: 600px) {
+  #app.open {
+    margin-left: 0;
+  }
+}
 #SideBar {
 --sidebar-width: min(350px, 85vw);
 --sidebar-height: 90%;
@@ -34,6 +39,8 @@ body
   display: flex;
   flex-direction: column;
   height: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   width: var(--sidebar-width);
   position: fixed;
   z-index: 1;
@@ -188,7 +195,7 @@ body
 }
 tr:not(:last-child) 
 {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid white;
 }
 #TaskCompletionCheckBox
 {
@@ -209,11 +216,6 @@ tr:not(:last-child)
     background-color: grey;
     transform: translateX(3px);
 }
-#schedule
-{
-  height: 600px;
-  z-index: 0;
-}
 #PageContent
 {
   display: flex;
@@ -226,4 +228,46 @@ tr:not(:last-child)
   gap: 5%;
   margin-left: 5%;
   margin-bottom: 5%;
+}
+#output
+{
+  margin-left: 20px;
+}
+
+#calender {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.lm-calendar {
+  order: -1;
+  flex-shrink: 0;
+  width: 350px;
+}
+
+#schedule {
+  height: 600px;
+  z-index: 0;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  #calender {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .lm-calendar {
+    width: 100%;
+  }
+
+  #schedule {
+    width: 100%;
+    height: 500px;
+  }
 }

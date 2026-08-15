@@ -1,18 +1,16 @@
-import { formatDistanceToNow } from 'date-fns';
-export default class Task
+import { formatDistanceToNow, toDate } from 'date-fns';
+import { GenericApiFetch } from '../Api/Api';
+const data = await GenericApiFetch();
+
+export function calculateDaysSinceCreation()
 {
-    calculateDaysSinceCreation()
-    {
-            var daysSinceCreation = formatDistanceToNow(
-            this.creationDate
-        )
-        return daysSinceCreation;
-    }
-    calculateDaysTillExpire()
-    {
-            var daysTillExpire = formatDistanceToNow(
-            this.dueDate
-        )
-        return daysTillExpire;
-    }
+        var daysSinceCreation = formatDistanceToNow(
+        data.creationDate
+    )
+    return daysSinceCreation;
+}
+export function calculateDaysTillExpire()
+{
+    var daysTillExpire = formatDistanceToNow(data.dueDate)
+    return daysTillExpire;
 }
