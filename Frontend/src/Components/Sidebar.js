@@ -163,7 +163,7 @@ export function RenderSideBar()
         section.appendChild(subSections);
         SideBarSections.appendChild(section);
     });
-    document.getElementById('app').appendChild(SideBarButton);
+    document.querySelector('header').appendChild(SideBarButton);
     document.getElementById('app').appendChild(SideBar);
 }
 export function SideBarOpen()

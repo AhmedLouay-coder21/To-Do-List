@@ -1,3 +1,30 @@
+:root {
+  --grid-unit: 1rem;
+  --border-radius-base: 0.5rem;
+
+  --color-text: orange;
+  --color-bg: #2b2a4a;
+  --color-table: #2b2a4a80;
+  --bg-img: url("./images/NeonCity_Dawn.png");
+}
+
+[data-theme="dawn"] {
+  --color-text: orange;
+  --color-bg: #2b2a4a;
+  --color-table: #2b2a4a80;
+  --bg-img: url("./images/NeonCity_Dawn.png");
+}
+
+[data-theme="night"] {
+  --color-text: #fa1593;
+  --color-bg: rgb(15, 15, 59);
+  --color-table: rgba(15, 15, 59, 0.514);
+  --bg-img: url("./images/NeonCity_Night.png");
+}
+#theme-toggle
+{
+  order: 9999;
+}
 html
 {
   font-family: cursive;
@@ -10,27 +37,49 @@ body
   padding: 0;
   min-height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to bottom, #FED0C5, #519CEF);
+  background-image: var(--bg-img);
   background-repeat: no-repeat;
-}
-#app {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: .2s ease-in-out;
+}
+#app 
+{
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 50px;
-  height: 100%;
-  padding: 2% 5% 0;
   margin-left: 0;
-  transition: margin-left 0.5s ease;
-}
-#app.open
-{
-  margin-left: var(--sidebar-width, 160px);
+  min-height: 100vh;
 }
 @media screen and (max-width: 600px) {
   #app.open {
     margin-left: 0;
   }
+}
+header 
+{
+  display: flex;
+  justify-content: space-between;
+  opacity: 90%;
+  height: 100px;
+  width: 100%;
+  background-color: var(--color-bg);
+}
+footer 
+{
+  opacity: 90%;
+  align-items: center;
+  background-color: var(--color-bg);
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
 }
 #SideBar {
 --sidebar-width: min(350px, 85vw);
@@ -46,7 +95,8 @@ body
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   overflow-x: hidden;
   transform: translateX(-150%);
   transition: transform 0.5s ease;
@@ -59,10 +109,6 @@ body
 }
 #SideBar.open {
   transform: translateX(0);
-}
-
-#SideBarButton.open {
-  display: none;
 }
 #SideBar a {
   padding: 6px 8px 6px 16px;
@@ -92,14 +138,12 @@ body
 }
 .hamburger-button {
   background-color: transparent;
+  color: var(--color-text);
   border: none;
 }
 #SideBarButton
 {
-  position: fixed;
-  top: 5%;
-  left: 5%;
-  z-index: 2;
+  margin: 40px;
 }
 .section-header
 {
@@ -156,12 +200,12 @@ body
 #tasks-table table {
   width: 90%;
   table-layout: fixed;
+  background-color: var(--color-table);
+  border-radius: 12px;
   min-width: 0;
   border-collapse: collapse;
-}
-#tasks-table table
-{
   margin-left: 5%;
+  color: var(--color-text);
 }
 #tasks-table th, #tasks-table td 
 {
@@ -219,7 +263,16 @@ tr:not(:last-child)
 #PageContent
 {
   display: flex;
+  gap: 60px;
   flex-direction: column;
+}
+.page-header
+{
+  display: flex;
+  color: var(--color-text);
+  gap: 50px;
+  font-size: xx-large;
+  margin-left: 100px;
 }
 #header
 {
@@ -270,4 +323,56 @@ tr:not(:last-child)
     width: 100%;
     height: 500px;
   }
+}
+.lm-calendar-container , .lm-schedule
+{
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+.dark-mode-toggle {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.dark-mode-toggle__icon {
+  width: 70%;
+  height: 70%;
+  color: #F2C94C;
+  transition: color .2s linear;
+}
+
+.dark-mode-toggle__icon:hover {
+  color: #F6C11F;
+}
+
+.dark-mode-toggle__icon--moon {
+  color: white;
+  opacity: .6;
+  transition: opacity .2s linear, color .2s linear;
+}
+
+.dark-mode-toggle__icon--moon:hover {
+  color: white;
+  opacity: .8;
+}
+
+.dark-mode-toggle__rays {
+  transition: opacity .2s linear .2s;
+}
+
+.dark-mode-toggle__icon--moon .dark-mode-toggle__rays {
+  transition: opacity .2s linear;
+  opacity: 0;
+}
+
+.dark-mode-toggle__cut-out {
+  transition: transform .5s cubic-bezier(0.54,-0.42, 0.29, 1.3);
+}
+
+.dark-mode-toggle__icon--moon .dark-mode-toggle__cut-out {
+  transform: translateX(-30%);
+  transition: transform .5s cubic-bezier(0.21, 0.17, 0.43, 1.43);
 }
