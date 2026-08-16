@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <script src="https://cdn.jsdelivr.net/npm/lemonadejs/dist/lemonade.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@calendarjs/ce/dist/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -41,10 +42,15 @@
             </svg>
             </button>
         </header>
+        <div class="wrapper">
+            <canvas class="c1"></canvas>
+        </div>
         <div id="PageContent">
         </div>
         <footer>
-
+              <div class="reflection-wrapper">
+                <canvas class="c2"></canvas>
+            </div>
         </footer>
     </div>
 </body>

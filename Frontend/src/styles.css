@@ -51,6 +51,7 @@ body
 #app 
 {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   gap: 50px;
@@ -73,9 +74,8 @@ header
 }
 footer 
 {
-  opacity: 90%;
+  opacity: 80%;
   align-items: center;
-  background-color: var(--color-bg);
   height: 50px;
   width: 100%;
   text-align: center;
@@ -272,7 +272,7 @@ tr:not(:last-child)
   color: var(--color-text);
   gap: 50px;
   font-size: xx-large;
-  margin-left: 100px;
+  margin-left: 5%;
 }
 #header
 {
@@ -375,4 +375,39 @@ tr:not(:last-child)
 .dark-mode-toggle__icon--moon .dark-mode-toggle__cut-out {
   transform: translateX(-30%);
   transition: transform .5s cubic-bezier(0.21, 0.17, 0.43, 1.43);
+}
+html, body {
+  margin: 0;
+  background-color: #41415d;
+}
+
+canvas, .c2 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wrapper .c1 {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.reflection-wrapper {
+  max-height:100%;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+.c2 {
+  transform: rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 180deg) rotate3d(0, 0, 1, 180deg);
+  backface-visibility: visible;
+  opacity: .4;
+  filter: blur(1px);
+  z-index: 15;
+  position: relative;
 }
