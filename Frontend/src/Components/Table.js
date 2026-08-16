@@ -62,14 +62,14 @@ export async function CreateTasksTable(tasksType = 'all')
         accessorKey: "creationDate",
         header: "Creation date",
         cell: ({ getValue }) => {
-            return format(new Date(getValue()), "yyyy-mm-dd E HH:mm");
+            return format(new Date(getValue()), "yyyy-MM-dd E HH:mm");
         },
     },
     {
         accessorKey: "dueDate",
         header: "Due date",
         cell: ({ getValue }) => {
-            return format(new Date(getValue()), "yyyy-mm-dd E HH:mm");
+            return format(new Date(getValue()), "yyyy-MM-dd E HH:mm");
         },
     },
     {
