@@ -8,13 +8,15 @@ import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-b
 import { GenericApiFetch } from '../Api/Api'
 import { format, isFuture, isToday } from 'date-fns'
 import { changeDateFormat } from '../utils/dateUtils'
+
 const features = tableFeatures({
   coreReactivityFeature: storeReactivityBindings(),
   rowSelectionFeature,
 })
-const data = await GenericApiFetch();
-export function CreateTasksTable(tasksType = 'all')
+
+export async function CreateTasksTable(tasksType = 'all')
 {
+    const data = await GenericApiFetch();
     let tableData;
 
     if(tasksType == 'today')
@@ -36,6 +38,10 @@ export function CreateTasksTable(tasksType = 'all')
 
     if(tableData.length == 0)
     {
+        const empty = document.createElement('div');
+        empty.classList.add('empty-state');
+        empty.textContent = 'No tasks here.';
+        document.getElementById('PageContent').appendChild(empty);
         return;
     }
 

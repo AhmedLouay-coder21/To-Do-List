@@ -1,11 +1,9 @@
 import { CreateTasksTable } from "../components/Table";
 import { ClearPageContent } from "../utils/clearPageContent";
 import { upcomingTasksCount } from "../utils/taskCount";
-export function RenderUpcoming()
+export async function RenderUpcoming()
 {
     ClearPageContent();
-    const header = document.createElement('div');
-    header.id = 'header';
 
     const headerText = document.createElement('div');
     headerText.textContent = 'Upcoming';
@@ -13,9 +11,11 @@ export function RenderUpcoming()
     const headerCounter = document.createElement('div');
     headerCounter.textContent = upcomingTasksCount();
 
-    header.appendChild(headerText);
-    header.appendChild(headerCounter);
+    const pageHeader = document.createElement('div');
+    pageHeader.classList.add('page-header');
+    pageHeader.appendChild(headerText);
+    pageHeader.appendChild(headerCounter);
+    document.getElementById('PageContent').appendChild(pageHeader);
     
-    document.getElementById('PageContent').appendChild(header);
-    CreateTasksTable('upcoming');
+    await CreateTasksTable('upcoming');
 }

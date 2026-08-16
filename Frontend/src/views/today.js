@@ -1,11 +1,9 @@
 import { CreateTasksTable } from "../components/Table";
 import { ClearPageContent } from "../utils/clearPageContent";
 import { todayTasksCount } from "../utils/taskCount";
-export function RenderToday()
+export async function RenderToday()
 {
     ClearPageContent();
-    const header = document.createElement('div');
-    header.id = 'header';
 
     const headerText = document.createElement('div');
     headerText.textContent = 'Today';
@@ -13,9 +11,11 @@ export function RenderToday()
     const headerCounter = document.createElement('div');
     headerCounter.textContent = todayTasksCount();
 
-    header.appendChild(headerText);
-    header.appendChild(headerCounter);
+    const pageHeader = document.createElement('div');
+    pageHeader.classList.add('page-header');
+    pageHeader.appendChild(headerText);
+    pageHeader.appendChild(headerCounter);
+    document.getElementById('PageContent').appendChild(pageHeader);
 
-    document.getElementById('PageContent').appendChild(header);
-    CreateTasksTable('today');
+    await CreateTasksTable('today');
 }
