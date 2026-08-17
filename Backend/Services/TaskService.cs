@@ -25,12 +25,7 @@ namespace Backend.Services
         }
         public List<ToDoTask> GetAllTasks()
         {
-            var toDoTask = _context.ToDoTasks.ToList();
-            if (!toDoTask.Any())
-            {
-                return null;
-            }
-            return toDoTask;
+            return _context.ToDoTasks.ToList();
         }
         public ToDoTask GetTaskById(int Id)
         {
@@ -60,9 +55,23 @@ namespace Backend.Services
 
             if (updatedToDoTaskDto.IsCompleted is bool isCompleted)
                 toDoTask.IsCompleted = isCompleted;
+            
+            if (updatedToDoTaskDto.StartDate.HasValue)
+                toDoTask.StartDate = updatedToDoTaskDto.StartDate;
 
             if (updatedToDoTaskDto.DueDate.HasValue)
                 toDoTask.DueDate = updatedToDoTaskDto.DueDate;
+
+            if (updatedToDoTaskDto.ProjectId.HasValue)
+            {
+                var projectExists = _context.Projects
+                    .Any(p => p.Id == updatedToDoTaskDto.ProjectId.Value);
+
+                if (!projectExists)
+                    return null;
+
+                toDoTask.ProjectId = updatedToDoTaskDto.ProjectId.Value;
+            }
 
             _context.ToDoTasks.Update(toDoTask);
             _context.SaveChanges();
@@ -77,13 +86,15 @@ namespace Backend.Services
                 return null;
             }
             _context.ToDoTasks.Remove(task);
+            _context.SaveChanges();
+
             return "The task was deleted successfully";
         }
         public string? DeleteAllTasks()
         {
             _context.ToDoTasks.ExecuteDelete();
-            _context.SaveChanges();
-            return "All tasks was deleted successfully";
+
+            return "All tasks were deleted successfully";
         }
     }
 }

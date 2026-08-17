@@ -46,7 +46,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete]
-        public ActionResult<string?> DeleteAllTasks(int Id)
+        public ActionResult<string?> DeleteAllTasks()
         {
             return Ok(_taskService.DeleteAllTasks());
         }

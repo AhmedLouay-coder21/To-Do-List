@@ -8,6 +8,8 @@ namespace Backend.DTO
         public Priority? Priority { get; set; }
         public string? Details { get; set; }
         public bool? IsCompleted { get; set; } = false;
+        public DateTime? StartDate { get; set; }
         public DateTime? DueDate { get; set; }
+        public int? ProjectId { get; set; }
     }
 }

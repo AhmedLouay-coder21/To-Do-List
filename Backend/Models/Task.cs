@@ -1,5 +1,4 @@
-﻿using Backend.DTO;
-using Backend.Enums;
+﻿using Backend.Enums;
 
 namespace Backend.Models
 {
@@ -11,6 +10,12 @@ namespace Backend.Models
         public string? Details { get; set; } = "";
         public bool IsCompleted { get; set; } = false;
         public DateTime? CreationDate { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? DueDate { get; set; }
+
+        public int? ProjectId { get; set; }
+
+        public Project? Project { get; set; } = null!;
+
     }
 }
